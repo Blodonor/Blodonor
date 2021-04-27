@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-const postSchema = new mongoose.Schema({
-    patient_name:{
+const donorSchema = new mongoose.Schema({
+    name:{
         type:String,
         required:true
     },
-    guardian_name:{
+    email:{
         type:String,
         required:true
     },
@@ -20,10 +20,6 @@ const postSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    hospital:{
-        type:String,
-        required:true
-    },
     address:{
         type:String,
         required:true
@@ -34,4 +30,4 @@ const postSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-mongoose.model("Post",postSchema)
+mongoose.model("Donor",donorSchema)

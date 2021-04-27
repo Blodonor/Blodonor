@@ -1,6 +1,7 @@
-const { Mongoose } = require("mongoose")
+const { Mongoose }=require("mongoose")
+
 const mongoose=require('mongoose')
-const userSchema = new mongoose.Schema({
+const AdminSchema = new mongoose.Schema({
     name:{
         required:true,
         type:String
@@ -9,13 +10,9 @@ const userSchema = new mongoose.Schema({
         required:true,
         type:String
     },
-    phone:{
-        required:true,
-        type:String
-    },
     password:{
         required:true,
         type:String
-    }
+    },
 })
-mongoose.model('User',userSchema)
+mongoose.model('Admin',AdminSchema)

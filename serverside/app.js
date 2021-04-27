@@ -7,7 +7,6 @@ const PORT= 5000
 // app.get("/",(req,res)=>{
 //     res.send("Hello world")
 // })
-
 mongoose.connect(MONGOURI, { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -28,9 +27,13 @@ const countMiddleware=(req,res,next)=>{
 
 require('./models/user')
 require('./models/post')
+require('./models/admin')
+require('./models/donor')
 app.use(express.json())
 app.use(require('./routes/auth'))
+app.use(require('./routes/donor'))
 app.use(require('./routes/post'))
+app.use(require('./routes/admins'))
 
 app.listen(PORT,()=>{
     console.log("listenig at server",PORT)

@@ -1,32 +1,31 @@
+const { Router } = require('express')
 const express = require('express')
 const router = express.Router()
 const mongoose=require('mongoose')
-const User = mongoose.model('User')
-const bcrypt=require('bcryptjs')
-
+const Admin = mongoose.model('Admin')
+const bcrypt = require('bcryptjs')
 const jwt=require("jsonwebtoken")
 const {JWT_SERECTKEY}=require('../keys')
 
-router.post("/signup",(req,res)=>{
-    const {name,email,password,phone}=req.body
-    if(!email || !password || !name){
+router.post('/adminsignup',(req,res)=>{
+    const {name,email,password}=req.body
+    if (!email  || !password ||!name){
         return res.status(422).json({error:"please enter all the fields"})
     }
-    User.findOne({email:email})
+    Admin.findOne({email:email})
     .then((savedUser)=>{
         if(savedUser){
             console.log(savedUser)
-            return res.status(422).json({error:"user already exists"})
+            return res.status(422).json({error:"Admin already exists"})
         }
         bcrypt.hash(password,13)
         .then(hashedpassword=>{
-            const user = new User(  {
+            const admin = new Admin({
                 email:email,
                 password:hashedpassword,
-                name,
-                phone
+                name
             })
-            user.save()
+            admin.save()
             .then(user=>{
                 res.json({message:"successfully Signup"})
             })
@@ -40,12 +39,13 @@ router.post("/signup",(req,res)=>{
         console.log(error)
     })
 })
-router.post("/signin",(req,res)=>{
+
+router.post('/adminsignin',(req,res)=>{
     const {email,password}=req.body
     if(!email || !password){
         return res.status(422).json({error:"please enter all the fields"})
     }
-    User.findOne({email:email}) 
+    Admin.findOne({email:email})
     .then(savedUser=>{
         if(!savedUser){
             return res.status(422).json({error:"Invalid mail or password"})
@@ -53,10 +53,10 @@ router.post("/signin",(req,res)=>{
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
-               //res.json({message:"successfully signed in"})
+              //  res.json({message:"successfully signed in"})
                 const token=jwt.sign({_id:savedUser._id},JWT_SERECTKEY)
-                const {_id,name,email}=savedUser
-                res.json({token:token,user:{_id,name,email}})
+                const {_id,email}=savedUser
+                res.json({token:token,admin:{_id,email}})
             }
             else{
                 return res.status(422).json({error:"Invalid mail or password"})
@@ -67,4 +67,4 @@ router.post("/signin",(req,res)=>{
         })
     })
 })
-module.exports = router
+module.exports=router
