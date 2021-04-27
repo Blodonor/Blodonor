@@ -1,14 +1,60 @@
 a {
   color: black !important;
 }
+body {
+  background: #eff0f3;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.signinback {
+  background-image: url("Page.png");
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: center;
+}
+.signupback {
+  background-image: url("signupPage.png");
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-attachment: scroll;
+  background-position: center;
+}
+.back {
+  margin: 5% 10%;
+}
 .auth-card {
-  padding: 20px;
+  padding: 30px;
   text-align: center;
-  max-width: 400px;
-  margin: 20px auto;
+  max-width: 450px;
+  background-color: #eff0f3;
+  margin: 50px auto;
+  border: 1px solid #ba0015;
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+.form-card {
+  padding: 30px;
+  text-align: center;
+  max-width: 1400px;
+  background-color: #eff0f3;
+  margin: 50px auto;
+  border: 1px solid #ba0015;
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
+.my-card {
+  height: 690px;
 }
 .notification {
   max-width: 500px;
+  height: 100px;
   height: auto;
   margin: auto;
 }
@@ -16,6 +62,8 @@ a {
   max-width: 550px;
   margin: 0px auto;
   min-width: 20px;
+}
+footer {
 }
 .notecards {
   height: auto;
@@ -35,17 +83,34 @@ a {
   nav-index: 23;
   z-index: 38;
 }
-.menu-bars {
-  margin-left: 2rem;
+.sign {
+  font-size: 1rem;
+  color: #ba0015;
+}
+.sign1 {
   font-size: 2rem;
-  background-color: none;
+  color: #ba0015;
 }
-.nav-menu {
-  background-color: #060b26;
+.input-field input[type="text"] {
+  border: 1px solid #d2d6dc !important;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 0px 0 #d2d6dc !important;
 }
-.input-field input[type="text"]:focus {
-  border-bottom: 1px solid rgb(34, 177, 243) !important;
-  box-shadow: 0 1px 0px 0 rgb(33, 110, 253) !important;
+.input-field input[type="number"] {
+  border: 1px solid #d2d6dc !important;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 0px 0 #d2d6dc !important;
+}
+.input-field input[type="password"] {
+  border: 1px solid #d2d6dc !important;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 0px 0 #d2d6dc !important;
 }
 .item {
   width: 30%;
@@ -110,7 +175,13 @@ a {
   border-radius: 10px;
   border-bottom: 1px solid rgb(34, 177, 243) !important;
 }
-
+.textstyle {
+  font-size: 1.6rem;
+  font-family: Poppins;
+}
+.fourbutton {
+  margin-left: 120px;
+}
 @media only screen and (max-width: 800px) {
   .home {
     width: 90%;
@@ -121,6 +192,18 @@ a {
     grid-column-gap: 15px;
     grid-row-gap: 15px;
   }
+
+  .form-card {
+    padding: 20px;
+    text-align: center;
+    max-width: 900px;
+    background-color: #eff0f3;
+    margin: 30px auto;
+    border: 1px solid #ba0015;
+    box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+  }
+
   .cards {
     height: auto;
     padding: 10px;
@@ -128,6 +211,14 @@ a {
     align-items: center;
     justify-content: center;
   }
+  .textstyle {
+    font-size: 1.2rem;
+    font-family: Poppins;
+  }
+  .fourbutton {
+    margin-left: 100px;
+  }
+
   .search {
     width: 60%;
     margin: auto;
@@ -143,7 +234,7 @@ a {
     grid-row-gap: 20px;
   }
 }
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 600px) {
   .home {
     width: 100%;
     height: 80%;
@@ -153,11 +244,20 @@ a {
     grid-column-gap: 5px;
     grid-row-gap: 5px;
   }
+  .fourbutton {
+    margin-left: 80px;
+  }
   .auth-card {
     padding: 20px;
     text-align: center;
     max-width: 400px;
     margin: 100px auto;
+  }
+  .form-card {
+    padding: 20px;
+    text-align: center;
+    max-width: 500px;
+    margin: 30px auto;
   }
   .cards {
     height: auto;
@@ -171,7 +271,13 @@ a {
     margin: auto;
     border-color: black;
   }
-
+  .textstyle {
+    font-size: 1.2rem;
+    font-family: Poppins;
+  }
+  .magic {
+    display: none;
+  }
   .gallery {
     width: 100%;
     height: 50%;
@@ -182,6 +288,12 @@ a {
     grid-row-gap: 20px;
   }
 }
+@media only screen and (max-width: 450px) {
+  .fourbutton {
+    margin-left: 40px;
+  }
+}
+
 @media only screen and (max-width: 360px) {
   .gallery {
     width: 100%;
@@ -191,5 +303,12 @@ a {
     grid-template-columns: 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
+  }
+  .fourbutton {
+    margin-left: 10px;
+  }
+  .textstyle {
+    font-size: 1rem;
+    font-family: Poppins;
   }
 }
