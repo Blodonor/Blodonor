@@ -5,7 +5,7 @@ const mongoose=require('mongoose')
 const Admin = mongoose.model('Admin')
 const bcrypt = require('bcryptjs')
 const jwt=require("jsonwebtoken")
-const {JWT_SERECTKEY}=require('../keys')
+const {JWT_SERECTKEY}=require('../../config/keys')
 
 router.post('/adminsignup',(req,res)=>{
     const {name,email,password}=req.body

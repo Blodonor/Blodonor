@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
+const {ObjectId}=mongoose.Schema.Types
 const donorSchema = new mongoose.Schema({
     name:{
+        type:String,
+        required:true
+    },
+    age:{
         type:String,
         required:true
     },
@@ -27,6 +32,10 @@ const donorSchema = new mongoose.Schema({
     time:{
         type:String,
         required:true
+    },
+    postedBy:{
+        type:ObjectId,
+        ref:"User"
     }
 },{timestamps:true})
 

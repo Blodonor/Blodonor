@@ -1,11 +1,11 @@
 const express= require('express')
 const mongoose = require('mongoose')
 const router=express.Router()
-const Post=mongoose.model('Post')
+const Posts=mongoose.model('Posts')
 const requireAdmin = require('../middleware/requireadmin')
 const requireLogin = require('../middleware/requirelogin')
 router.get('/adminposts',(req,res)=>{
-    Post.find()
+    Posts.find()
     .sort('-createdAt')
     .then(Posts=>{
         res.json({Posts})
@@ -14,12 +14,14 @@ router.get('/adminposts',(req,res)=>{
         res.json(err)
     })
 })
+
+
 router.post('/requestform',(req,res)=>{
     const {patient_name,guardian_name,hospital,address,bloodgroup,phone,pic}=req.body
     if(!patient_name || !guardian_name || !address || !hospital || !bloodgroup || !pic || !phone){
         return res.status(422).json({error:"you need to enter all the fields"})
     }
-    const post=new Post({
+    const post=new Posts({
         patient_name,
         guardian_name,
         phone,
@@ -27,7 +29,8 @@ router.post('/requestform',(req,res)=>{
         address,
         bloodgroup,
         photo:pic,
-        time:new Date().getTime()
+        time:new Date().getTime(),
+        
     })
     post.save()
     .then(results=>{
@@ -37,9 +40,8 @@ router.post('/requestform',(req,res)=>{
         console.log(err)
     })
 })
-router.delete('/deletepost/:postId',requireAdmin,(req,res)=>{
-    Post.findOne({_id:req.params.postId})
-    .populate("postedBy","_id")
+router.delete('/deletpost/:postId',(req,res)=>{
+    Posts.findById({_id:req.params.postId})
     .exec((err,post)=>{
         if(err || !post){
             return res.status(422).json({error:err})
@@ -51,7 +53,6 @@ router.delete('/deletepost/:postId',requireAdmin,(req,res)=>{
             .catch(err=>{
                 console.log(err)
             })
-    }
-    )
+    })
 })
 module.exports=router

@@ -14,43 +14,75 @@ router.get('/donorslist',(req,res)=>{
         res.json(err)
     })
 })
-router.post('/bloodonationform',(req,res)=>{
-    const {name,email,address,bloodgroup,phone,pic}=req.body
-    if(!email || !name || !address|| !bloodgroup || !pic || !phone){
+
+router.post('/bloodonationform',requireLogin,(req,res)=>{
+    const {name,email,address,age,bloodgroup,phone,pic}=req.body
+    if(!email || !name || !address|| !bloodgroup || !pic || !phone || !age){
         return res.status(422).json({error:"you need to enter all the fields"})
     }
+    Donor.findOne({email:email})
+    .then(savedUser=>{
+        if(savedUser){
+            return res.status(422).json({error:"You are Already a Donor"})
+        }
     const donor=new Donor({
         email,
         name,
+        age,
         phone,
         address,
         bloodgroup,
         photo:pic,
-        time:new Date().getTime()
+        time:new Date().getTime(),
+        postedBy:req.user
     })
     donor.save()
     .then(results=>{
-        res.json({donor:results})
+        res.json({results})
     })
     .catch(err=>{
         console.log(err)
     })
 })
-router.delete('/deletepost/:postId',(req,res)=>{
-    Donor.findOne({_id:req.params.postId})
-    .populate("postedBy","_id")
-    .exec((err,post)=>{
-        if(err || !post){
+})
+router.get('/mypost',requireLogin,(req,res)=>{
+    Donor.findOne({postedBy:req.user._id})
+    .populate("postedBy","name")
+    .then(mypost=>{
+        res.json({mypost})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+router.put('/litersdonated',(req,res)=>{
+    //console.log(req.body.postId)
+    Donor.findByIdAndUpdate(req.body.postId,{
+        $push:{liters:liters+100}
+    },{
+        new:true
+    }).exec((err,result)=>{
+        if(err){
             return res.status(422).json({error:err})
         }
-            Donor.remove()
+        else{
+            res.json(result)
+        }
+    })
+})
+router.delete('/deletepost/:postId',(req,res)=>{
+    Donor.findOne({_id:req.params.postId})
+    .exec((err,donor)=>{
+        if(err || !donor){
+            return res.status(422).json({error:err})
+        }
+            donor.remove()
             .then(result=>{
                 res.json(result)
             })
             .catch(err=>{
                 console.log(err)
             })
-    }
-    )
+    })
 })
 module.exports=router

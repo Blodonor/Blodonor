@@ -1,7 +1,8 @@
 const jwt =require('jsonwebtoken')
 const mongoose= require('mongoose')
-const {JWT_SERECTKEY}=require('../keys')
+const {JWT_SERECTKEY}=require('../../config/keys')
 const User = mongoose.model("User")
+const Donor =mongoose.model("Donor")
 module.exports=(req,res,next)=>{
     const {authorization} =req.headers
     if(!authorization){
@@ -15,8 +16,10 @@ module.exports=(req,res,next)=>{
         const {_id}=payload
         User.findById(_id).then(userdata=>{
             req.user=userdata
+
             next()
         })
+
         
     })
 }
