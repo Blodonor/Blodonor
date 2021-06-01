@@ -70,7 +70,7 @@ const SignIn = () =>{
                     <i className="material-icons right">send</i>
                 </button>
                     </div>
-                <h6><Link to="/signup">Already have an account Signin</Link>
+                <h6><Link to="/signup">New user please Signup here</Link>
                 </h6>
             </div>
         </div>

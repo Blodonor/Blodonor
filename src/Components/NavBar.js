@@ -7,10 +7,12 @@ const NavBar = () =>{
     const {state,dispatch} =useContext(UserContext)
     const [sidebar,setSidebar]=useState(false)
     const showSidebar=()=>setSidebar(!sidebar)
+
     const logoutmodel = useRef(null)
     const side = useRef(null)
   
     const history =useHistory()
+    const user =localStorage.getItem("jwt")
     useEffect(()=>{
       M.Modal.init(logoutmodel.current)
    },[])
@@ -23,23 +25,33 @@ const NavBar = () =>{
     dispatch({type:"CLEAR"})
     history.push('/signin')
   }
+  const Message=()=>{
+    M.toast({html:"Please signup for become a Donor",classes:"#43a047 green darken-1"})
+  }
+  const requests="/"+user+"/requests"
+  const donors="/"+user+"/donorslist"
+
     const renderList=()=>{
       //  console.log(state)
     //    console.log(state,dispatch)
         if(state){
           if(state.name){
+            
             return [
               <li key="5">
               <button data-target="modal1" className="btn #c62828 red darken-3 modal-trigger sidenav-close">Logout
              </button>
              </li>,
               <li> <Link to="/" className="sidenav-close">Home</Link></li>,
-              <li key="2"><Link to='/services' className="sidenav-close">Service</Link></li>,
+              <li key="2"><Link to='/services' className="sidenav-close">Services</Link></li>,
+              <li key="3"><Link to="/account" className="sidenav-close">Account</Link></li>, 
+
               <li key="3"><Link to="/help" className="sidenav-close">Help</Link></li>,
-              <li key="7"><Link to="/bloodonationform" className="sidenav-close">
+              <li key="7"><Link to="/services/bloodonationform" className="sidenav-close">
                 <button className="btn #c62828 red darken-3">Become a donor
                </button></Link>
              </li>,
+             
              ]
               }
               else{
@@ -49,10 +61,13 @@ const NavBar = () =>{
              </button>
              </li>,
                <li> <Link to="/" className="sidenav-close">Home</Link></li>,
-               <li key="2"><Link to='/services' className="sidenav-close">Service</Link></li>,
-               <li key="3"><Link to="/account" className="sidenav-close">Account</Link></li>, 
+               <li key="2"><Link to='/services' className="sidenav-close">Services</Link></li>,
                <li key="3"><Link to="/help" className="sidenav-close">Help</Link></li>,   
-                <li key="7"><Link to="/bloodonationform" className="sidenav-close">
+               <li key="5"><Link to={donors} className="sidenav-close">Donors</Link></li>,
+               <li key="10"><Link to={requests} className="sidenav-close">Requests</Link></li>,
+
+                <li key="7"><Link to="/services/bloodonationform" className="sidenav-close">
+                
                 <button className="btn #c62828 red darken-3">Become a donor
                </button></Link>
                </li>
@@ -63,11 +78,15 @@ const NavBar = () =>{
           return [
             <li> <Link to="/" className="sidenav-close">Home</Link></li>,
             <li key="2"><Link to='/services' className="sidenav-close">Service</Link></li>,
-            <li key="3"><Link to="/account" className="sidenav-close">Account</Link></li>, 
             <li key="3"><Link to="/help" className="sidenav-close">Help</Link></li>,
            <li  key="6"><Link to="/signin" className="sidenav-close">Signin</Link></li>,
           //  <li  key="7"><Link to="/signup" className="sidenav-close">Signup</Link></li>,
-          //  <li key="12"><Link to="/adminsignin" className="sidenav-close">Admin Login</Link></li>
+            <li key="12"><Link to="/adminsignin" className="sidenav-close">Admin Login</Link></li>,
+            <li key="7"><Link to="/signup" className="sidenav-close" onClick={()=>Message()}>
+               
+                <button className="btn #c62828 red darken-3">Become a donor
+               </button></Link>
+               </li>
            ]
         }
     }

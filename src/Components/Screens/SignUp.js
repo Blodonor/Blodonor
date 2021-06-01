@@ -62,7 +62,7 @@ const SignIn = () =>{
                         {/* <label for="first_name" style={{padding:"0px",color:"#BA0015"}}>Mobile No(optional)</label> */}
                         </div>
                         <div class="input-field" style={{paddingTop:"5px",width:"100%"}}>
-                        <input placeholder="Placeholder" id="password" type="password" class="validate" style={{padding:"5px"}} 
+                        <input placeholder="Password" id="password" type="password" class="validate" style={{padding:"5px"}} 
                 value={password}
                 onChange={(e)=>setPassword(e.target.value)}/>
                         {/* <label for="first_name" style={{padding:"0px",color:"#BA0015"}}>Password</label> */}

@@ -10,6 +10,8 @@ const Donors=()=>{
     const [image,setImage] = useState("")
     const [bloodgroup,setBloodgroup]=useState("")
     const [address,setAddress]=useState("")
+    const [age,setAge]=useState("")
+
     const [url,setUrl] = useState("")
     useEffect(()=>{
        if(url){
@@ -23,6 +25,7 @@ const Donors=()=>{
                 name,
                 email,
                 phone,
+                age,
                 address,
                 bloodgroup,
                 pic:url
@@ -37,6 +40,7 @@ const Donors=()=>{
                M.toast({html:"Response Sent",classes:"#43a047 green darken-1"})
             //   console.log(data)
                history.push('/')
+               
            }
         }).catch(err=>{
             console.log(err)
@@ -69,24 +73,24 @@ const Donors=()=>{
         <div>
         <div className="my-card">
              <div className="card form-card input-field ">
-                 <div className="sign1"><b>Donate Form</b></div>
+                 <div className="sign1"><b>Donation Form</b></div>
                      <div class="row" style={{paddingTop:"20px"}}>
-                     <div class="col s12 m4 l2">
+                     <div class="col s3 m3 l3">
                      <label className="textstyle" style={{color:"#BA0015"}}>Name</label>
                         </div>
-                        <div class="col s12 m9 l10">
+                        <div class="col s12 m9 l9">
                             <input 
                                 type="text"
                                 style={{padding:"20px"}}
-                                placeholder=" "
+                                placeholder=""
                                 value={name}
                                 onChange={(e)=>setName(e.target.value)}>
                             </input>
                             </div>
-                            <div class="col s12 m4 l2">
-                     <label className="textstyle" style={{color:"#BA0015"}}>email address</label>
+                            <div class="col s5 m3 l3">
+                             <label className="textstyle" style={{color:"#BA0015"}}>Email address</label>
                         </div>
-                        <div class="col s12 m9 l10">
+                        <div class="col s12 m9 l9">
                             <input 
                                 type="text"
                                 placeholder=""
@@ -95,12 +99,12 @@ const Donors=()=>{
                                 onChange={(e)=>setEmail(e.target.value)}>
                             </input>
                             </div> 
-                        <div class="col s12 m12 l2">
-                     <label className="textstyle" style={{color:"#BA0015"}}>Phone Number</label>
+                            <div class="col s5 m3 l3">
+                             <label className="textstyle" style={{color:"#BA0015"}}>Phone Number</label>
                         </div>
-                        <div class="col s12 m12 l10">
+                        <div class="col s12 m9 l9">
                             <input 
-                                type="text"
+                                type="number"
                                 placeholder=""
                                 value={phone}
                                 style={{padding:"20px"}}
@@ -108,12 +112,12 @@ const Donors=()=>{
                             </input>
                             </div>
                             
-                            <div class="col s12 m4 l2">
-                     <label className="textstyle" style={{color:"#BA0015"}}>
+                            <div class="col s5 m3 l3">
+                             <label className="textstyle" style={{color:"#BA0015"}}>
                          Your Address
                      </label>
                         </div>
-                        <div class="col s12 m9 l10">
+                        <div class="col s12 m9 l9">
                             <input 
                                 type="text"
                                 placeholder=""
@@ -122,24 +126,43 @@ const Donors=()=>{
                                 onChange={(e)=>setAddress(e.target.value)}>
                             </input>
                             </div>
-
-                            <div class="col s12 m4 l2">
-                     <label className="textstyle" style={{color:"#BA0015"}}>
-                         BloodGroup
+                            <div class="col s3 m3 l3">
+                         <label className="textstyle" style={{color:"#BA0015"}}>
+                         Age
                      </label>
                         </div>
-                        <div class="col s12 m9 l10">
-                            <input 
-                                type="text"
+                        <div class="col s12 m9 l9">
+                                <input 
+                                type="number"
                                 placeholder=""
                                 style={{padding:"20px"}}
-                                value={bloodgroup}
-                                onChange={(e)=>setBloodgroup(e.target.value)}>
+                                value={age}
+                                onChange={(e)=>setAge(e.target.value)}>
                             </input>
                             </div>
+                            <div class="col s6 m3 l3">                    
+
+                     <label className="textstyle" style={{color:"#BA0015"}}>
+                         Your Blood Group*
+                     </label>
+                     
+                        </div>
+                     <div class="col s12 m9 l9">
+                            <select class="browser-default" onChange={(e)=>setBloodgroup(e.target.value)}>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+
+                            </select>
 
                             </div>
-                              
+                        </div>
                         <div className="file-field input-field">
                             <div className="btn" style={{backgroundColor:"#BA0015"}}>
                             <span><i className="material-icons" >person</i></span>

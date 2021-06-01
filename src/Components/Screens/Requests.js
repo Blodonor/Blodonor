@@ -1,8 +1,19 @@
 import React,{useContext, useEffect,useRef,useState} from "react";
 import {Link} from 'react-router-dom'
 import {UserContext} from '../../App'
+import { CSVLink } from "react-csv";
 import M from 'materialize-css'
 const Requests=()=>{
+    const headers = [
+        { label: "Patient_Name", key: "patient_name" },
+        { label: "Guardian_Name", key: "guardian_name" },
+        { label: "Phone_Number", key: "phone" },
+        { label: "Bloodgroup", key: "bloodgroup"},
+        {label:"Hospital_name",key:"hospital"},
+        {label:"Address",key:"address"},
+        {label:"Date",key:"createdAt"},
+        {label:"Photo",key:"photo"}
+      ];
     const logomodel = useRef(null)
     const [data,setData]=useState([])
     const [search,setSearch]=useState('')
@@ -20,9 +31,9 @@ const Requests=()=>{
         })
         M.Modal.init(logomodel.current)
      },[])
-    const deletePost=(postid)=>{
+     const deletePost=(postid)=>{
         console.log(postid)
-        fetch(`/deletepost/${postid}`,{
+        fetch(`/deletpost/${postid}`,{
             method:"delete",
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
@@ -33,6 +44,7 @@ const Requests=()=>{
              const newData = data.filter(item=>{
                  return item._id !== result._id
              })
+             console.log(newData)
              setData(newData)
         })
     }
@@ -40,13 +52,21 @@ const Requests=()=>{
         window.location.reload()
       }
     const filterData=data.filter(data2=>{
-        return data2.patient_name.toLowerCase().includes(search.toLowerCase())
+        return data2.bloodgroup.toLowerCase().includes(search.toLowerCase())
     })
+    console.log(filterData)
+
+    const CSVReport = {
+        data: filterData,
+        headers: headers,
+        filename: "requests-"+search+new Date()+'.csv'
+      };
+
     return(
         <div>
         
-        <div className="search">
-        <input type="search" placeholder="Search.." onChange={(e)=>setSearch(e.target.value)}></input>
+        <div className="input-field search" style={{padding:'10px'}}>
+        <input type="text" style={{padding:"20px"}} placeholder="Search.." onChange={(e)=>setSearch(e.target.value)}></input>
         </div>
         <div className="home">
             {
@@ -68,6 +88,10 @@ const Requests=()=>{
             })
             } 
         </div>
+        <div style={{textAlign:"center"}}>
+            <button>
+      <CSVLink {...CSVReport}>Export to CSV</CSVLink></button>
+      </div>
         </div>
         )
 }

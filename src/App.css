@@ -16,6 +16,7 @@ main {
   background-image: url("Page.png");
   background-repeat: no-repeat;
   background-size: 90%;
+  background-attachment: scroll;
   background-position: center;
 }
 .signupback {
@@ -38,8 +39,11 @@ main {
   box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2px;
 }
+.thank {
+  margin: 200px auto;
+}
 .form-card {
-  padding: 30px;
+  padding: 15px;
   text-align: center;
   max-width: 1400px;
   background-color: #eff0f3;
@@ -50,7 +54,7 @@ main {
 }
 
 .my-card {
-  height: 690px;
+  height: 700px;
 }
 .notification {
   max-width: 500px;
@@ -90,6 +94,9 @@ footer {
 .sign1 {
   font-size: 2rem;
   color: #ba0015;
+}
+.cheat {
+  margin-top: 100px;
 }
 .input-field input[type="text"] {
   border: 1px solid #d2d6dc !important;
@@ -148,14 +155,14 @@ footer {
   right: 20px !important;
   left: auto !important;
 }
-.timer-component {
+/* .timer-component {
   font-weight: bold;
   color: green;
 }
 .timer-compo {
   font-weight: bold;
   color: red;
-}
+} */
 .search {
   width: 30%;
   margin: 20px auto;
@@ -178,6 +185,7 @@ footer {
 .textstyle {
   font-size: 1.6rem;
   font-family: Poppins;
+  margin-left: 0px;
 }
 .fourbutton {
   margin-left: 120px;
@@ -192,7 +200,12 @@ footer {
     grid-column-gap: 15px;
     grid-row-gap: 15px;
   }
-
+  .thank {
+    margin: 150px auto;
+  }
+  .cheat {
+    margin-top: 30px;
+  }
   .form-card {
     padding: 20px;
     text-align: center;
@@ -215,10 +228,6 @@ footer {
     font-size: 1.2rem;
     font-family: Poppins;
   }
-  .fourbutton {
-    margin-left: 100px;
-  }
-
   .search {
     width: 60%;
     margin: auto;
@@ -244,8 +253,14 @@ footer {
     grid-column-gap: 5px;
     grid-row-gap: 5px;
   }
+  .thank {
+    margin: 130px;
+  }
   .fourbutton {
     margin-left: 80px;
+  }
+  .cheat {
+    margin-top: 0px;
   }
   .auth-card {
     padding: 20px;
@@ -266,6 +281,7 @@ footer {
     align-items: center;
     justify-content: center;
   }
+
   .search {
     width: 80%;
     margin: auto;
@@ -292,6 +308,9 @@ footer {
   .fourbutton {
     margin-left: 40px;
   }
+  .thank {
+    margin: 100px;
+  }
 }
 
 @media only screen and (max-width: 360px) {
@@ -306,6 +325,9 @@ footer {
   }
   .fourbutton {
     margin-left: 10px;
+  }
+  .thank {
+    margin: 70px;
   }
   .textstyle {
     font-size: 1rem;

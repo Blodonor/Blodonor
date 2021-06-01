@@ -5,10 +5,12 @@ import {UserContext} from '../../App'
 import M from 'materialize-css'
 const   DonorsList=()=>{
     const headers = [
-        { label: "Name", key: "name" },
-        { label: "email", key: "email" },
-        { label: "phone", key: "phone" },
-        { label: "bloodgroup", key: "bloodgroup" }
+        { label: "Donor Name", key: "name" },
+        { label: "Email Address", key: "email" },
+        { label: "Phone Number", key: "phone" },
+        { label: "Bloodgroup", key: "bloodgroup" },
+        {label:"Date",key:"createdAt"},
+        {label:"Photo",key:"photo"}
       ];
        
     const logomodel = useRef(null)
@@ -22,9 +24,8 @@ const   DonorsList=()=>{
             }
         }).then(res=>res.json())
         .then(result=>{
-            // console.log(result)
             setData(result.Posts)
-          //  setLike(result.Posts.likes)
+
         })
         M.Modal.init(logomodel.current)
      },[])
@@ -41,6 +42,7 @@ const   DonorsList=()=>{
              const newData = data.filter(item=>{
                  return item._id !== result._id
              })
+             console.log(newData)
              setData(newData)
         })
     }
@@ -50,17 +52,17 @@ const   DonorsList=()=>{
     const filterData=data.filter(data2=>{
         return data2.bloodgroup.toLowerCase().includes(search.toLowerCase())
     })
-    console.log(filterData)
+   
     const CSVReport = {
         data: filterData,
         headers: headers,
-        filename: "donors"+new Date()+'.csv'
+        filename: "donors"+search+new Date()+'.csv'
       };
     return(
         <div>
         
-        <div className="search">
-        <input type="search" placeholder="Search.." onChange={(e)=>setSearch(e.target.value)}></input>
+        <div className="input-field search" >
+        <input type="text" style={{padding:"20px"}} placeholder="Search.." onChange={(e)=>setSearch(e.target.value)}></input>
         </div>
         <div className="home">
             {
